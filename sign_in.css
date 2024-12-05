@@ -1,0 +1,206 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 874px; /* Set body height to 874px */
+    overflow: hidden; /* Prevent scrolling if content overflows */
+}
+
+/* Section Container */
+section {
+    width: 90%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 100%; /* Make section take up full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Ensure spacing between elements */
+    margin-bottom: 150px;
+}
+
+/* Logo */
+section > div img {
+    width: 70px;
+    margin-bottom: 20px;
+}
+/* Logo Styling */
+
+.logo {
+    width: 150px;
+    height: auto; 
+    margin: 0 auto 20px; 
+    display: block; 
+}
+
+
+/* Title */
+.title h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+/* Input Fields */
+.inputs {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.inputs p {
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-left: 45px;
+    color: #888888;
+}
+
+
+.inputs input,
+.form-group input {
+    width: 80%; /* Set width to 80% */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin: 0 auto 15px; /* Center horizontally and add space below */
+    outline: none;
+    display: block; /* Ensures it's treated as a block element for centering */
+    transition: border 0.3s;
+}
+
+
+.inputs input:focus,
+.form-group input:focus {
+    border-color: #E94435;
+}
+/* Forgot Password Link */
+.forgot-password {
+    text-align: left; /* Align to the left */
+    margin-top: 10px; /* Add some space above the link */
+    display: flex;
+    justify-content: center;
+}
+
+.forgot-password a {
+    font-size: 14px; /* Set the font size */
+    color: #007bff; /* Blue color for the link */
+    text-decoration: none; /* Remove underline by default */
+    transition: text-decoration 0.3s ease, color 0.3s ease; /* Add smooth transitions */
+}
+
+.forgot-password a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #bc3529; /* Darker blue color when hovered */
+}
+
+/* Button */
+.button_sign {
+    margin: 20px 0;
+}
+
+.button_sign button {
+    width: 80%;
+    height: 42px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #E94435;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button_sign button:hover {
+    background: #bc3529;
+}
+
+/* Social Media Buttons */
+section > div:nth-of-type(5) {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+section > div:nth-of-type(5) div {
+    flex: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    transition: background 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+section > div:nth-of-type(5) div:hover {
+    background: #f4f4f4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+section .images{
+    display: flex;
+    justify-content: center;
+}
+section img {
+    width: 20x;
+    height: 20px;
+}
+
+
+/* Footer Text */
+section > div:last-of-type p {
+    font-size: 14px;
+    margin-top: 15px;
+    color: #888888;
+}
+
+section > div:last-of-type p span {
+    color: #bc3529;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+section > div:last-of-type p span:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    section {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .title h3 {
+        font-size: 18px;
+    }
+
+    .inputs p,
+    section > div:last-of-type p {
+        font-size: 12px;
+    }
+
+    .button_sign button {
+        font-size: 14px;
+    }
+}

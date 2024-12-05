@@ -1,0 +1,326 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  min-height: 100vh; /* Allow body to grow */
+  overflow: auto; /* Enable scrolling */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
+  /* Welcome Section */
+  .welcome-container {
+    background: url('images/background.svg') no-repeat center center/cover;
+    background-size: cover;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    margin: 0px auto;
+    text-align: center;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .logo {
+    width: 100px;
+    height: auto;
+  }
+  
+  .create-qr-button {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #e94435;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-qr-button:hover {
+    background-color: #bc3529;
+  }
+  
+  .welcome-container h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-container p {
+    font-size: 16px;
+  }
+  
+  /* Description Section */
+  .description {
+    background-color: #ffffff;
+    color: #333333;
+    text-align: left;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .description h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #e94435;
+    margin-bottom: 10px;
+  }
+  
+  .description p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .description .restaurants {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+  }
+
+
+  /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 370px; /* Set the max width to 400px */
+    overflow: hidden;
+    margin: 20px auto;
+    background-color: #fff;
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    gap: 10px;
+  }
+  
+  .card {
+    min-width: 370px; /* Adjust card width for smaller screens */
+    max-width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .card img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .card p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .new-badge {
+    background-color: #5cb85c;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  
+  /* Navigation Buttons */
+  .prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .prev-btn {
+    left: 10px; /* Adjust position for smaller width */
+  }
+  
+  .next-btn {
+    right: 10px; /* Adjust position for smaller width */
+  }
+  
+  .prev-btn:hover, .next-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .email_container p{
+    text-align: left;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .email_container .input{
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+.group {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.group {
+    width: 40%;
+}
+
+  .form-group {
+      width: 80%; /* Set width to 80% */
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 20px 0px 0px 20px;
+      margin: 0 auto 15px; /* Center horizontally and add space below */
+      outline: none;
+      display: block; /* Ensures it's treated as a block element for centering */
+      transition: border 0.3s;
+  }
+
+.form-group2{
+    width: 30%; /* Set width to 80% */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    background-color: #F18186   ;
+    border-radius: 0px 20px 20px 0px;
+    margin: 0 auto 15px; /* Center horizontally and add space below */
+    outline: none;
+    display: block; /* Ensures it's treated as a block element for centering */
+    transition: border 0.3s;
+}
+
+/* map container */
+.map-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .map-container h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333333;
+  }
+  
+/* Footer */
+.footer_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #4F4F4F;
+    color: #B1B1B1;
+    width: 400px;
+}
+
+.footer_container .h3{
+    font-size: 14px;
+}
+
+.footer_container .hr{
+    width: 400px;
+    color: #B1B1B1;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.footer_container .author{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.footer_container .h5{
+    margin: 10px;
+}
+
+
+
+  /* Media Query for Smaller Screens */
+@media (max-width: 600px) {
+    .slider-container {
+      max-width: 100%; /* Ensure slider fits screen */
+    }
+  
+    .card {
+      min-width: 100%; /* Adjust card width to fit */
+    }
+  
+    .map-container {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .map-container h2 {
+      font-size: 20px; /* Smaller font size for titles */
+    }
+  
+    iframe {
+      height: 200px; /* Reduce map height for smaller screens */
+    }
+  
+    .prev-btn,
+    .next-btn {
+      width: 30px;
+      height: 30px; /* Reduce button size */
+    }
+
+    .group{
+        width: 70%;
+    }
+  }
