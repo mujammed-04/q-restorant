@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Menu</title>
+  <link rel="stylesheet" href="addMenu.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Add Menu</h1>
+    <form id="menu-form">
+      <div class="form-group">
+        <label for="food-name">Food Name</label>
+        <input type="text" id="food-name" name="food-name" placeholder="Enter food name" required>
+      </div>
+      <div class="form-group">
+        <label for="food-price">Price</label>
+        <input type="number" id="food-price" name="food-price" placeholder="Enter price" required>
+      </div>
+      <div class="form-group">
+        <label for="food-image">Upload Image</label>
+        <input type="file" id="food-image" name="food-image" accept="image/*" required>
+      </div>
+      <div class="buttons">
+        <button type="submit" id="add-button">Add</button>
+        <button type="button" id="finish_button">Finish</button>
+      </div>
+    </form>
+
+    <h2>Menu List</h2>
+    <div id="menu-list" class="menu-list">
+      <!-- Dynamically added cards will appear here -->
+    </div>
+  </div>
+
+  <script src="addMenu.js"></script>
+
+</body>
+</html>
