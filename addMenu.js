@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuList = document.getElementById("menu-list");
     const menuItems = []; // Array to store menu items
     let restaurantName = '';
-  
+    
     form.addEventListener("submit", (e) => {
       e.preventDefault();
   
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>${restaurantName}</title>
-          <link rel="stylesheet" href="styles.css">
+          <link rel="stylesheet" href="Menus/styles.css">
         </head>
         <body>
           <h1>${restaurantName}</h1>
@@ -132,21 +132,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       `;
   
-      // Create a download link for HTML file
       const htmlBlob = new Blob([htmlContent], { type: "text/html" });
       const htmlUrl = URL.createObjectURL(htmlBlob);
       const htmlLink = document.createElement("a");
       htmlLink.href = htmlUrl;
-      htmlLink.download = `${restaurantName}.html`;
+      htmlLink.download = `${restaurantName}.html`; // This is the name of the downloaded HTML file
       htmlLink.click();
-  
-      // Create a download link for CSS file
+      
       const cssBlob = new Blob([cssContent], { type: "text/css" });
       const cssUrl = URL.createObjectURL(cssBlob);
       const cssLink = document.createElement("a");
       cssLink.href = cssUrl;
-      cssLink.download = "styles.css";
+      cssLink.download = `${restaurantName}.css`; // This is the name of the downloaded CSS file
       cssLink.click();
+      
     }
   });
   

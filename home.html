@@ -12,10 +12,18 @@
   <div class="welcome-container">
     <div class="nav">
       <img src="images/logo1.svg" alt="QRestaurant Logo" class="logo">
-      <button id="create-qr-button" class="create-qr-button">Create my QR</button>
+      <!-- Conditional Buttons Based on Authorization -->
+      <div id="auth-buttons">
+        <!-- Default Buttons (will be shown if not authorized) -->
+        <button id="sign-in-button" class="auth-button">Sign In</button>
+        <button id="sign-up-button" class="auth-button">Sign Up</button>
+        <!-- Buttons for authorized users -->
+        <button id="create-qr-button" class="auth-button" style="display: none;">Create my QR</button>
+        <button id="log-out-button" class="auth-button" style="display: none;">Log Out</button>
+      </div>
     </div>
     <h1>Welcome to Partners and Users</h1>
-    <p>all brands of restaurants in Kazakhstan in one website</p>
+    <p>All brands of restaurants in Kazakhstan in one website</p>
   </div>
 
   <!-- Description Section -->
@@ -35,44 +43,18 @@
   <div class="slider-container">
     <button class="prev-btn">❮</button>
     <div class="slider">
-      <div class="card">
-        <img src="images/orta.svg" alt="Orta">
-        <h3>Orta</h3>
-        <p>4.0 ⭐️ Dining</p>
-        <p>Asian, Kazakh, Uzbek, Turkish</p>
-      </div>
-      <div class="card">
-        <img src="images/sandyk.svg" alt="Sandyq">
-        <h3>Sandyq</h3>
-        <p><span class="new-badge">New!</span> Dining</p>
-        <p>Kazakh, Uzbek, Kyrgyz</p>
-      </div>
-      <div class="card">
-        <img src="images/bauyrdaq.svg" alt="Bauyrdaq">
-        <h3>Bauyrdaq</h3>
-        <p><span class="new-badge">New!</span> Dining</p>
-        <p>Kazakh, Uzbek, Asian</p>
-      </div>
-      <div class="card">
-        <img src="images/platforma.svg" alt="PlatformA">
-        <h3>PlatformA</h3>
-        <p>4.0 ⭐️ Dining</p>
-        <p>Asian, European, American</p>
-      </div>
+      <!-- Cards go here -->
     </div>
     <button class="next-btn">❯</button>
   </div>
   <script src="slider.js"></script>
 
   <!-- email -->
-
   <div class="email_container">
-    <h1>
-        Get The Your QR
-    </h1>
+    <h1>Get Your QR</h1>
     <p>
-        We will send you a link, open it on your phone <br>
-        to download the QR
+      We will send you a link, open it on your phone <br>
+      to download the QR
     </p>
   </div>
   <div class="group">
@@ -86,36 +68,83 @@
   <div class="map-container">
     <h2>Find Us Here</h2>
     <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.885392413899!2d76.92745507602057!3d43.23784807913457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836990aaf8a0c1%3A0x8e6ff92864e15129!2sGaidar%20St%2054%2C%20Almaty%2C%20Kazakhstan!5e0!3m2!1sen!2sus!4v1697128608947!5m2!1sen!2sus" 
-      width="100%" 
-      height="300" 
-      style="border:0;" 
-      allowfullscreen="" 
-      loading="lazy" 
+      src="https://www.google.com/maps/embed?pb=..." 
+      width="100%" height="300" style="border:0;" 
+      allowfullscreen="" loading="lazy" 
       referrerpolicy="no-referrer-when-downgrade">
     </iframe>
   </div>
 
   <!-- Footer -->
-   <div class="footer_container">
-        <img src="images/logo1.svg" alt="">
-        <hr class="hr">
-        <h3>Who We Are</h3>
-        <hr class="hr">
-        <h3>Work With Us</h3>
-        <hr class="hr">
-        <h3>Scan QR</h3>
-        <hr class="hr">
-        <h3>Contact Us</h3>
-        <hr class="hr">
-        <div class="img">
-            <img src="images/whatsup.svg" alt="">
-            <img src="images/instagram.svg" alt="">
-        </div>
-        <div class="author">
-            <h5>Bekzhan Sergaliev</h5>
-            <h5>QRestaurant</h5>
-        </div>
-   </div>
+  <div class="footer_container">
+    <img src="images/logo1.svg" alt="">
+    <hr class="hr">
+    <h3>Who We Are</h3>
+    <hr class="hr">
+    <h3>Work With Us</h3>
+    <hr class="hr">
+    <h3>Scan QR</h3>
+    <hr class="hr">
+    <h3>Contact Us</h3>
+    <hr class="hr">
+    <div class="img">
+        <img src="images/whatsup.svg" alt="">
+        <img src="images/instagram.svg" alt="">
+    </div>
+    <div class="author">
+        <h5>Bekzhan Sergaliev</h5>
+        <h5>QRestaurant</h5>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Simulate user authorization (change to actual login status check)
+      const userAuthorized = localStorage.getItem('userAuthorized'); // Example check from localStorage
+
+      // Get buttons
+      const signInButton = document.getElementById('sign-in-button');
+      const signUpButton = document.getElementById('sign-up-button');
+      const createQrButton = document.getElementById('create-qr-button');
+      const logOutButton = document.getElementById('log-out-button');
+
+      if (userAuthorized === 'true') {
+        // Show authorized buttons and hide unauthorized ones
+        createQrButton.style.display = 'inline-block';
+        logOutButton.style.display = 'inline-block';
+        signInButton.style.display = 'none';
+        signUpButton.style.display = 'none';
+      } else {
+        // Show sign-in and sign-up buttons
+        createQrButton.style.display = 'none';
+        logOutButton.style.display = 'none';
+        signInButton.style.display = 'inline-block';
+        signUpButton.style.display = 'inline-block';
+      }
+
+      // Event listener for log-out button
+      logOutButton.addEventListener('click', () => {
+        localStorage.removeItem('userAuthorized');
+        location.reload(); // Refresh to show sign-in/signup buttons
+      });
+
+      // Event listeners for sign-in and sign-up buttons
+      signInButton.addEventListener('click', () => {
+        // Redirect to sign-in page or show sign-in form
+        window.location.href = 'signin.html';
+      });
+
+      signUpButton.addEventListener('click', () => {
+        // Redirect to sign-up page or show sign-up form
+        window.location.href = 'signup.html';
+      });
+
+      // Event listener for create-qr button
+      createQrButton.addEventListener('click', () => {
+        // Redirect to QR creation page
+        window.location.href = 'QRPage.html';
+      });
+    });
+  </script>
 </body>
 </html>

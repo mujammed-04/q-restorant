@@ -78,7 +78,90 @@
   .add-button:hover {
     background-color: #bc3529;
   }
+
+  #restaurant-image {
+    width: 100%; /* Full width for the file input */
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #757575; /* Neutral text color */
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
   
+  #restaurant-image:hover {
+    background-color: #f1f1f1; /* Slightly darker background on hover */
+    border-color: #007bff; /* Add a subtle border color change */
+  }
+  
+  #restaurant-image:focus {
+    outline: none;
+    border-color: #4caf50; /* Green border on focus */
+    background-color: #fff;
+  }
+  
+  #restaurant-image::file-selector-button {
+    padding: 5px 7px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  #restaurant-image::file-selector-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  #restaurant-image::file-selector-button:focus {
+    outline: none;
+    background-color: #4caf50; /* Green background on focus */
+  }
+  
+  /* Specific Style for Time Inputs */
+.time-group{
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="time"] {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px;
+  padding-left: 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus State for Time Inputs */
+.form-group input[type="time"]:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
   /* Responsive Design */
   @media (max-width: 600px) {
     .form-container {
