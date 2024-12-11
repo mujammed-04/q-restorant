@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Page</title>
+  <link rel="stylesheet" href="menuPage.css">
+</head>
+<body>
+  <div class="restaurant-info">
+    <div class="restaurant-img-notif">
+      <img class="image" id="restaurant-image" alt="Restaurant Image" />
+      <div id="notification-icon">
+        <img src="images/notif.svg" alt="">
+        <div>
+          <select id="language-options" name="language-options">
+            <option value="EN">EN</option>
+            <option value="RU">RU</option>
+            <option value="KZ">KZ</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="restaurant-name">
+      <h2 id="restaurant-name">Restaurant Name</h2>
+      <div class="res">
+        <p>Restaurant</p>
+      </div>
+      <div class="time-location">
+        <p id="restaurant-hours"><span id="opening-time"></span> - <span id="closing-time"></span>,</p>
+        <p id="restaurant-location">Restaurant Location</p>
+      </div>
+    </div>
+  </div>
+  
+  <form id="menu-form">
+    <input type="text" id="food-name" placeholder="Enter Food Name" required />
+    <input type="number" id="food-price" placeholder="Enter Food Price" required />
+    <input type="file" id="food-image" accept="image/*" required />
+    <div class="form-buttons">
+      <button type="submit" id="add-menu-button">Add Menu</button>
+      <button type="button" id="finish-button">Finish</button>
+    </div>
+  </form>
+  
+  <div class="preview">
+    <h2>Menu Preview</h2>
+    <div id="menu-list" class="menu-list"></div>
+    <button id="finish_button">Download Menu</button>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Retrieve restaurant data from localStorage
+      const restaurantName = localStorage.getItem('restaurantName');
+      const restaurantImage = localStorage.getItem('restaurantImage');
+      const openingTime = localStorage.getItem('openingTime');
+      const closingTime = localStorage.getItem('closingTime');
+      const restaurantLocation = localStorage.getItem('restaurantLocation');
+
+      // Populate the restaurant info section
+      if (restaurantName && restaurantImage && openingTime && closingTime && restaurantLocation) {
+        document.getElementById('restaurant-name').textContent = restaurantName;
+        document.getElementById('restaurant-image').src = restaurantImage;
+        document.getElementById('restaurant-location').textContent = restaurantLocation;
+        document.getElementById('opening-time').textContent = openingTime;
+        document.getElementById('closing-time').textContent = closingTime;
+      } else {
+        alert('Restaurant information is missing. Please go back and fill the details.');
+        window.location.href = 'QRPage.html'; // Redirect to the QR Page
+      }
+
+      // Menu handling script (your existing menu logic can be inserted here)
+      const form = document.getElementById("menu-form");
+      const menuList = document.getElementById("menu-list");
+      const menuItems = []; // Array to store menu items
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const foodName = document.getElementById("food-name");
+        const foodPrice = document.getElementById("food-price");
+        const foodImage = document.getElementById("food-image");
+
+        if (!foodName.value || !foodPrice.value || !foodImage.files[0]) {
+          alert("Please fill all the fields!");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const foodImageUrl = reader.result;
+          menuItems.push({ name: foodName.value, price: foodPrice.value, image: foodImageUrl });
+          renderMenuList();
+
+          // Clear input fields after adding a menu item
+          foodName.value = "";
+          foodPrice.value = "";
+          foodImage.value = ""; // Clears the file input
+        };
+        reader.readAsDataURL(foodImage.files[0]);
+      });
+
+      function renderMenuList() {
+        menuList.innerHTML = "";
+        menuItems.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="price">
+              <h3>${item.name}</h3>
+              <p>${item.price} tg</p>
+            </div>
+            <button class="remove-button" data-index="${index}">Remove</button>
+          `;
+          menuList.appendChild(card);
+        });
+
+        // Add event listeners to remove buttons
+        const removeButtons = document.querySelectorAll(".remove-button");
+        removeButtons.forEach((button) => {
+          button.addEventListener("click", (e) => {
+            const index = e.target.dataset.index;
+            menuItems.splice(index, 1); // Remove the item from the array
+            renderMenuList(); // Re-render the menu list
+          });
+        });
+      }
+
+      document.getElementById("finish_button").addEventListener("click", () => {
+        alert("Menu Download Feature Yet to Be Implemented!");
+      });
+    });
+  </script>
+</body>
+</html>

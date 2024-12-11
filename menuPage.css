@@ -1,0 +1,365 @@
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+  
+  .restaurant-info {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 255) 50%, rgba(255, 255, 255, 0)), url(images/back.webp); /* Add the gradient in front of the image */
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+  
+  .restaurant-info img {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .restaurant-info image{
+    border: 7px solid #ffffff;
+  }
+
+  
+  .restaurant-info h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  /* Form Styles */
+  form {
+    align-items: center;
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  form input[type="text"],
+  form input[type="number"],
+  form button {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  form input[type="file"],
+  form button {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .get-img{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  
+  form button {
+    background-color: #4caf50;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+  }
+  
+  form button:hover {
+    background-color: #45a049;
+  }
+  
+  
+
+  /* Menu List */
+  .menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  #menu-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .card img {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .card p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin: 5px 0;
+  }
+
+  .restaurant-img-notif{
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  .restaurant-name h2{
+    display: flex;
+    justify-content: left;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 36px;
+    font-weight: 300;
+  }
+
+  
+  /* Download Button */
+  #finish_button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #finish_button:hover {
+    background-color: #0056b3;
+  }
+  
+/* notification */
+  #notification-icon{
+    display: flex;
+    justify-content: right;
+  }
+  #notification-icon img{
+    width: 25px;
+    height: 25px;
+    background-color: black;
+    color: #ffffff;
+    padding: 15px;
+  }
+/* option select */
+  select {
+    width: 80px;
+    margin-left: 8px;
+    height: 55px;
+    padding: 8px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #757575;
+    background-color: white;
+
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+/* remove button */
+  .remove-button {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .remove-button:hover {
+    background-color: #ff0000;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+  }
+  
+  #add-menu-button, #finish-button {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+  
+  #add-menu-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  #add-menu-button:hover {
+    background-color: #45a049;
+  }
+  
+  #finish-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  #finish-button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  #food-image {
+    width: 90%; /* Full width for the file input */
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #757575; /* Neutral text color */
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  #food-image:hover {
+    background-color: #f1f1f1; /* Slightly darker background on hover */
+    border-color: #007bff; /* Add a subtle border color change */
+  }
+  
+  #food-image:focus {
+    outline: none;
+    border-color: #4caf50; /* Green border on focus */
+    background-color: #fff;
+  }
+  
+  #food-image::file-selector-button {
+    padding: 5px 7px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  #food-image::file-selector-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  #food-image::file-selector-button:focus {
+    outline: none;
+    background-color: #4caf50; /* Green background on focus */
+  }
+
+  .time-location{
+    display: flex;
+    justify-content: start;
+    color: #a7a7a7;
+    font-size: 18px;
+
+  }
+
+  .time-location p{
+    padding-right: 10px;
+  }
+  
+  .res{
+    display: flex;
+    justify-content: start;
+    color: #a7a7a7;
+    font-size: 18px;
+  }
+
+
+  /* Responsive Design */
+  @media screen and (max-width: 600px) {
+    h2 {
+      font-size: 20px;
+    }
+
+  
+    .restaurant-info img {
+      width: 100%;
+      max-width: 150px;
+      height: 150px;
+    }
+  
+    form {
+      width: 100%;
+    }
+  
+    .card {
+      width: 100%;
+      max-width: 400px;
+    }
+  
+    .card img {
+      width: 100%;
+      max-width: 400px;
+      height: 250px;
+    }
+  
+    #finish_button {
+      width: 90%;
+      font-size: 14px;
+    }
+  }
+  

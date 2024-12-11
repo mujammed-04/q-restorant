@@ -17,7 +17,23 @@
 
       <div class="form-group">
         <label for="restaurant-image">Upload Image</label>
-        <input type="file" id="restaurant-image" name="restaurant-image" accept="image/*">
+        <input type="file" id="restaurant-image" name="restaurant-image" accept="image/*" required>
+      </div>
+
+      <div class="time-group">
+        <div class="form-group">
+          <label for="opening-time">Opening Time</label>
+          <input type="time" id="opening-time" name="opening-time" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="closing-time">Closing Time</label>
+          <input type="time" id="closing-time" name="closing-time" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="restaurant-location">Location</label>
+        <input type="text" id="restaurant-location" name="restaurant-location" placeholder="Enter restaurant location" required>
       </div>
 
       <!-- Navigate to Add Menu -->
@@ -26,9 +42,29 @@
   </div>
 
   <script>
-    // Navigate to Add Menu page when the button is clicked
     document.getElementById('navigate-to-add-menu').addEventListener('click', () => {
-      window.location.href = 'addMenu.html'; // Redirect to addMenu.html
+      const restaurantName = document.getElementById('restaurant-name').value;
+      const restaurantImage = document.getElementById('restaurant-image').files[0];
+      const openingTime = document.getElementById('opening-time').value;
+      const closingTime = document.getElementById('closing-time').value;
+      const restaurantLocation = document.getElementById('restaurant-location').value;
+
+      if (!restaurantName || !restaurantImage || !openingTime || !closingTime || !restaurantLocation) {
+        alert('Please provide all details: name, image, opening time, closing time, and location.');
+        return;
+      }
+
+      // Convert the image file to a data URL and save to localStorage
+      const reader = new FileReader();
+      reader.onload = () => {
+        localStorage.setItem('restaurantName', restaurantName);
+        localStorage.setItem('restaurantImage', reader.result); // Save image as a data URL
+        localStorage.setItem('openingTime', openingTime); // Save opening time
+        localStorage.setItem('closingTime', closingTime); // Save closing time
+        localStorage.setItem('restaurantLocation', restaurantLocation); // Save location
+        window.location.href = 'menuPage.html'; // Navigate to the menu page
+      };
+      reader.readAsDataURL(restaurantImage);
     });
   </script>
 </body>
