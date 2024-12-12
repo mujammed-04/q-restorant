@@ -1,37 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Back Button - Go back to the previous page
+  const signupForm = document.querySelector(".signup-form");
+
+  signupForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    const payload = {
+      name: name,
+      email: email,
+      password: password
+    };
+
+    const fetchWithTimeout = (url, options, timeout = 10000) => {
+      return Promise.race([
+        fetch(url, options),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timeout")), timeout)
+        )
+      ]);
+    };
+
+    try {
+      const response = await fetchWithTimeout("http://localhost:9090/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Accept": "*/*",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }, 10000);
+
+      if (response.ok) {
+        const data = await response.text();
+        localStorage.setItem('email',email);
+        alert("Registration successful!");
+        window.location.href = "forgot.html";
+      } else {
+        const error = await response.text();
+        alert(`Registration failed: ${error.message || response.statusText}`);
+      }
+    } catch (error) {
+      alert(`An error occurred: ${error.message}`);
+    }
+  });
+  
+  
+
   const backButton = document.querySelector('.back-button');
   if (backButton) {
     backButton.addEventListener('click', () => {
       window.history.back(); // Goes back to the previous page
-    });
-  }
-
-  // Handle Sign In Form Submission
-  const signInButton = document.querySelector('.button_sign button');
-  if (signInButton) {
-    signInButton.addEventListener('click', (e) => {
-      e.preventDefault(); // Prevent form submission for demonstration
-      alert("Sign In button clicked!");
-    });
-  }
-
-  // Handle Sign Up Form Submission
-  const signUpButton = document.querySelector('.signup-button');
-  if (signUpButton) {
-    signUpButton.addEventListener('click', (e) => {
-      e.preventDefault(); // Prevent form submission for demonstration
-      alert("Sign Up button clicked!");
-    });
-  }
-
-  // Handle Resend Code for Verify Code
-  const resendCodeLink = document.querySelector('.resend-text a');
-  if (resendCodeLink) {
-    resendCodeLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      // Simulate resend action (you could make an API call here)
-      alert("Verification code resent!");
     });
   }
 
@@ -65,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Create QR Button - Redirect to QR Page
   const createQrButton = document.getElementById('create-qr-button');
   if (createQrButton) {
     createQrButton.addEventListener('click', () => {

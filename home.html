@@ -100,15 +100,14 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Simulate user authorization (change to actual login status check)
-      const userAuthorized = localStorage.getItem('userAuthorized'); // Example check from localStorage
+      const userAuthorized = localStorage.getItem('user'); // Example check from localStorage
 
-      // Get buttons
       const signInButton = document.getElementById('sign-in-button');
       const signUpButton = document.getElementById('sign-up-button');
       const createQrButton = document.getElementById('create-qr-button');
       const logOutButton = document.getElementById('log-out-button');
 
-      if (userAuthorized === 'true') {
+      if (userAuthorized) {
         // Show authorized buttons and hide unauthorized ones
         createQrButton.style.display = 'inline-block';
         logOutButton.style.display = 'inline-block';
@@ -124,19 +123,19 @@
 
       // Event listener for log-out button
       logOutButton.addEventListener('click', () => {
-        localStorage.removeItem('userAuthorized');
+        localStorage.removeItem('user');
         location.reload(); // Refresh to show sign-in/signup buttons
       });
 
       // Event listeners for sign-in and sign-up buttons
       signInButton.addEventListener('click', () => {
         // Redirect to sign-in page or show sign-in form
-        window.location.href = 'signin.html';
+        window.location.href = 'sign_in.html';
       });
 
       signUpButton.addEventListener('click', () => {
         // Redirect to sign-up page or show sign-up form
-        window.location.href = 'signup.html';
+        window.location.href = 'sign_up.html';
       });
 
       // Event listener for create-qr button

@@ -18,18 +18,74 @@
     <p class="verification-text">A verification code was sent to</p>
     <p class="masked-email">************</p>
 
-    <form class="code-form">
+    <div class="code-form">
       <div class="code-inputs">
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
+        <input id="code-get" type="text" maxlength="4" required>
       </div>
       <p class="resend-text">
         Didn’t get a verification code? <a href="#" class="resend-link">Resend code</a>
       </p>
       <button type="submit" class="verify-button">Verify</button>
-    </form>
+    </div>
   </section>
+  <script>
+   document.addEventListener("DOMContentLoaded", () => {
+  const verifyButton = document.querySelector(".verify-button");
+  const codeInput = document.getElementById("code-get");
+  const maskedEmailElement = document.querySelector(".masked-email");
+
+  const email = localStorage.getItem("email");
+
+  if (email) {
+    maskedEmailElement.textContent = maskEmail(email);
+  }
+
+  verifyButton.addEventListener("click", async (event) => {
+    event.preventDefault(); // Предотвращаем перезагрузку страницы
+    const code = codeInput.value.trim();
+
+    if (!code || code.length !== 4) {
+      alert("Введите корректный код (4 символа)");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:9090/api/auth/code", {
+        method: "POST",
+        headers: {
+          "Accept": "*/*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          code: code,
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.text();
+        alert("Код успешно проверен!");
+        window.location.href = "sign_in.html";
+      } else {
+        const error = await response.text();
+        alert(`Ошибка: ${error.message || "Неверный код"}`);
+      }
+    } catch (error) {
+      alert("Не удалось отправить запрос. Проверьте соединение с сервером.");
+    }
+  });
+});
+
+// Функция маскирования email
+function maskEmail(email) {
+  const parts = email.split("@");
+  const localPart = parts[0];
+  const domain = parts[1];
+  const maskedLocal = localPart.slice(0, 2) + "*".repeat(localPart.length - 2);
+  return `${maskedLocal}@${domain}`;
+}
+
+
+  </script>
 </body>
 </html>

@@ -55,6 +55,7 @@
       const restaurantImage = localStorage.getItem('restaurantImage');
       const openingTime = localStorage.getItem('openingTime');
       const closingTime = localStorage.getItem('closingTime');
+      const restaurantId = localStorage.getItem('restaurantId'); // Предположим, ID ресторана хранится в localStorage
       const restaurantLocation = localStorage.getItem('restaurantLocation');
 
       // Populate the restaurant info section
@@ -74,30 +75,70 @@
       const menuList = document.getElementById("menu-list");
       const menuItems = []; // Array to store menu items
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const foodName = document.getElementById("food-name");
-        const foodPrice = document.getElementById("food-price");
-        const foodImage = document.getElementById("food-image");
+      form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-        if (!foodName.value || !foodPrice.value || !foodImage.files[0]) {
-          alert("Please fill all the fields!");
-          return;
-        }
+  const foodName = document.getElementById("food-name").value;
+  const foodPrice = document.getElementById("food-price").value;
+  const foodImage = document.getElementById("food-image").files[0];
+  const restaurantId = localStorage.getItem("restaurantId"); // Предположим, ID ресторана хранится в localStorage
 
-        const reader = new FileReader();
-        reader.onload = () => {
-          const foodImageUrl = reader.result;
-          menuItems.push({ name: foodName.value, price: foodPrice.value, image: foodImageUrl });
-          renderMenuList();
+  if (!foodName || !foodPrice || !foodImage || !restaurantId) {
+    alert("Please fill all the fields and ensure restaurant information is available!");
+    return;
+  }
 
-          // Clear input fields after adding a menu item
-          foodName.value = "";
-          foodPrice.value = "";
-          foodImage.value = ""; // Clears the file input
-        };
-        reader.readAsDataURL(foodImage.files[0]);
-      });
+  // Получение токена авторизации
+  const token = localStorage.getItem('user').substring(1, localStorage.getItem('user').length - 1);
+  if (!token) {
+    alert("Authorization token is missing. Please log in.");
+    return;
+  }
+
+  // Создание FormData для отправки данных
+  const formData = new FormData();
+  formData.append("name", foodName);
+  formData.append("price", foodPrice);
+  formData.append("id", restaurantId); // ID ресторана
+  formData.append("file", foodImage); // Изображение блюда
+
+  try {
+    const response = await fetch("http://localhost:9090/api/menu/add", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`, // Токен авторизации
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(error.message || `Failed to add menu item (status ${response.status})`);
+    }
+
+    const result = await response.text();
+    alert("Menu item added successfully!");
+    console.log("Response:", result);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const foodImageUrl = reader.result;
+      menuItems.push({ name: foodName, price: foodPrice, image: foodImageUrl });
+      renderMenuList();
+
+      // Очищаем поля после успешного добавления
+      document.getElementById("food-name").value = "";
+      document.getElementById("food-price").value = "";
+      document.getElementById("food-image").value = "";
+    };
+    reader.readAsDataURL(foodImage);
+
+  } catch (error) {
+    console.error("Error adding menu item:", error);
+    alert(`Failed to add menu item: ${error.message}`);
+  }
+});
+
 
       function renderMenuList() {
         menuList.innerHTML = "";
@@ -126,9 +167,9 @@
         });
       }
 
-      document.getElementById("finish_button").addEventListener("click", () => {
-        alert("Menu Download Feature Yet to Be Implemented!");
-      });
+      document.getElementById("finish-button").addEventListener("click", () => {
+  window.location.href = "home.html";
+});
     });
   </script>
 </body>

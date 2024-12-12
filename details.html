@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Details Page</title>
+  <link rel="stylesheet" href="menuPage.css">
+</head>
+<body>
+  <div class="restaurant-info">
+    <img id="restaurant-image" alt="Restaurant Image" />
+    <h1 id="restaurant-name">Restaurant Name</h1>
+    <p id="restaurant-location">Location: <span></span></p>
+  </div>
+
+  <div class="menu-section">
+    <h2>Menu</h2>
+    <div id="menu-list"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+  // Извлекаем ID ресторана из URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const restaurantId = urlParams.get("id");
+
+  if (!restaurantId) {
+    alert("Restaurant ID is missing!");
+    return;
+  }
+
+  try {
+    // Получаем токен из localStorage
+    const token = localStorage.getItem("user")?.replace(/^"|"$/g, "");
+    if (!token) {
+      alert("Authorization token is missing. Please log in.");
+      return;
+    }
+
+    // Отправляем запрос на API
+    const response = await fetch(`http://localhost:9090/api/restorant/${restaurantId}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Accept": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Restaurant Data:", data);
+
+    // Отображаем данные ресторана
+    document.getElementById("restaurant-name").textContent = data.name;
+    document.getElementById("restaurant-image").src = `http://localhost:9090/api/v1/files/${data.image}`;
+    document.getElementById("restaurant-location").textContent = data.location || "Unknown Location";
+
+    // Отображаем меню
+    const menuList = document.getElementById("menu-list");
+    menuList.innerHTML = "";
+
+    data.menu.forEach((menuItem) => {
+      const menuCard = document.createElement("div");
+      menuCard.classList.add("menu-item");
+      menuCard.innerHTML = `
+        <img src="http://localhost:9090/api/v1/files/${menuItem.image}" alt="${menuItem.foodName}">
+        <div>
+          <h3>${menuItem.foodName}</h3>
+          <p>${menuItem.price} tg</p>
+        </div>
+      `;
+      menuList.appendChild(menuCard);
+    });
+  } catch (error) {
+    console.error("Error fetching restaurant details:", error);
+    alert("Failed to load restaurant details. Please try again.");
+  }
+});
+
+  </script>
+</body>
+</html>

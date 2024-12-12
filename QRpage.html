@@ -43,20 +43,47 @@
 
   <script>
     document.getElementById('navigate-to-add-menu').addEventListener('click', () => {
-      const restaurantName = document.getElementById('restaurant-name').value;
-      const restaurantImage = document.getElementById('restaurant-image').files[0];
-      const openingTime = document.getElementById('opening-time').value;
-      const closingTime = document.getElementById('closing-time').value;
-      const restaurantLocation = document.getElementById('restaurant-location').value;
+  const restaurantName = document.getElementById('restaurant-name').value;
+  const restaurantImage = document.getElementById('restaurant-image').files[0];
+  const openingTime = document.getElementById('opening-time').value;
+  const closingTime = document.getElementById('closing-time').value;
+  const restaurantLocation = document.getElementById('restaurant-location').value;
 
-      if (!restaurantName || !restaurantImage || !openingTime || !closingTime || !restaurantLocation) {
-        alert('Please provide all details: name, image, opening time, closing time, and location.');
-        return;
+  if (!restaurantName || !restaurantImage || !openingTime || !closingTime || !restaurantLocation) {
+    alert('Please provide all details: name, image, opening time, closing time, and location.');
+    return;
+  }
+
+  const token = localStorage.getItem('user').substring(1, localStorage.getItem('user').length - 1);
+
+  const formData = new FormData();
+  formData.append('name', restaurantName);
+  formData.append('file', restaurantImage);
+
+  fetch('http://localhost:9090/api/restorant', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+    body: formData,
+  })
+    .then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
       }
+      return response.text();
+    })
+    .then((data) => {
+      const parsedData = JSON.parse(data);
 
-      // Convert the image file to a data URL and save to localStorage
+      const restaurantId = parsedData.id;
+      
+      
+      alert('Restaurant added successfully!');
       const reader = new FileReader();
       reader.onload = () => {
+        localStorage.setItem('restaurantId', restaurantId);
         localStorage.setItem('restaurantName', restaurantName);
         localStorage.setItem('restaurantImage', reader.result); // Save image as a data URL
         localStorage.setItem('openingTime', openingTime); // Save opening time
@@ -64,8 +91,14 @@
         localStorage.setItem('restaurantLocation', restaurantLocation); // Save location
         window.location.href = 'menuPage.html'; // Navigate to the menu page
       };
-      reader.readAsDataURL(restaurantImage);
+      reader.readAsDataURL(restaurantImage);// Переход на страницу добавления меню
+    })
+    .catch((error) => {
+      console.error('Error adding restaurant:', error);
+      alert('Failed to add restaurant. Please try again.');
     });
+});
+
   </script>
 </body>
 </html>

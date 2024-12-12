@@ -48,5 +48,55 @@
             Don't have an account? <span class="sign-up-link">SIGN UP</span>
           </p>
     </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+  const signInButton = document.querySelector(".button_sign button");
+  const emailInput = document.querySelector('input[type="email"]');
+  const passwordInput = document.querySelector('input[type="password"]');
+
+  signInButton.addEventListener("click", async (event) => {
+    event.preventDefault(); // Предотвращаем перезагрузку страницы
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+      alert("Введите email и пароль.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:9090/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Accept": "*/*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        // Сохранение токена в localStorage
+        localStorage.setItem("user", JSON.stringify(data.token));
+
+        // Перенаправление на home.html
+        window.location.href = "home.html";
+      } else {
+        const error = await response.json();
+        alert(`Ошибка: ${error.message || "Не удалось войти в систему"}`);
+      }
+    } catch (error) {
+      console.error("Ошибка при отправке запроса:", error);
+      alert("Не удалось отправить запрос. Проверьте соединение с сервером.");
+    }
+  });
+});
+
+    </script>
 </body>
 </html>
