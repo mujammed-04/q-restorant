@@ -167,8 +167,47 @@
         });
       }
 
-      document.getElementById("finish-button").addEventListener("click", () => {
-  window.location.href = "home.html";
+      document.getElementById("finish-button").addEventListener("click", async () => {
+  const restaurantId = localStorage.getItem("restaurantId"); // Retrieve the restaurant ID from localStorage
+
+  if (!restaurantId) {
+    alert("Restaurant ID is missing. Please ensure the restaurant information is available.");
+    return;
+  }
+
+  // Get the authorization token
+  const token = localStorage.getItem("user")?.replace(/^"|"$/g, "");
+  if (!token) {
+    alert("Authorization token is missing. Please log in.");
+    return;
+  }
+
+  try {
+    // Send a POST request to generate the QR code
+    const response = await fetch(`http://localhost:9090/api/qr/generateQRCode?url=${restaurantId}`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`, // Include the authorization token
+        "Accept": "*/*"
+      },
+      body: "" // Send an empty body
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to generate QR code: ${error || response.status}`);
+    }
+
+    const result = await response.text();
+    alert("QR code generated successfully!");
+    console.log("QR Code Response:", result);
+
+    // Redirect to the home page
+    window.location.href = "home.html";
+  } catch (error) {
+    console.error("Error generating QR code:", error);
+    alert(`Error: ${error.message}`);
+  }
 });
     });
   </script>
